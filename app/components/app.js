@@ -46,11 +46,11 @@ export default function App() {
     }
 
     let timetext
-    if (time) {
-        let interval = time.getHours() % 12
-        let pm = time.getHours() > 12
+    if (offtime) {
+        let interval = offtime.getHours() % 12
+        let pm = offtime.getHours() > 12
         if (interval === 0) { interval = 12 }
-        timetext = interval + ':' + time.getMinutes() + ' ' + (pm ? 'PM' : 'AM')
+        timetext = interval + ':' + offtime.getMinutes() + ' ' + (pm ? 'PM' : 'AM')
     }
     else {
         timetext = 'Never'
