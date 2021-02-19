@@ -8,56 +8,55 @@ import React, { useEffect, useState } from 'react'
 
 const LOCALSTORAGE_KEY = 'daytrack-state'
 
-function timeFormat(time) {
-    if (time) {
-        let interval = time.getHours() % 12
-        let pm = time.getHours() > 12
-        if (interval === 0) { interval = 12 }
-        return interval + ':' + time.getMinutes() + ' ' + (pm ? 'PM' : 'AM')
-    }
-    else {
-        return 'Never'
-    }
-}
-
 export default function App() {
-    const [timeOff, setTimeOff] = useState(null)
+    const [offtime, setOfftime] = useState(null)
     const [timeList, setTimeList] = useState([])
 
     // Load localstorage if it exists
     useEffect(() => {
         let state = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY))
         if (state) { 
-            if (state.timeOff !== null)
-                setTimeOff(new Date(state.timeOff))
+            if (state.offtime !== null)
+                setOfftime(new Date(state.offtime))
             setTimeList(state.timeList)
         }
     }, [])
 
     // Set localstorage if update
     useEffect(() => {
-        let state = { timeOff, timeList }
+        let state = { offtime, timeList }
         localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(state))
-    }, [timeOff, timeList])
+    }, [offtime, timeList])
 
     const handleOffWorkClicked = () => {
-        if (timeOff === null)  {
-            setTimeOff(new Date())
+        if (offtime === null)  {
+            setOfftime(new Date())
         } else {
             let timeOn = new Date()
-            let time = timeOn.getTime() - timeOff.getTime()
+            let time = timeOn.getTime() - offtime.getTime()
             time = Math.round( time / (60 * 1000) ) % (24 * 60)
             setTimeList([...timeList, time])
-            setTimeOff(null)
+            setOfftime(null)
         }
     }
 
     const handleClear = () => {
-        setTimeOff(null)
+        setOfftime(null)
         setTimeList([])
     }
 
-    const buttontext = timeOff === null 
+    let timetext
+    if (time) {
+        let interval = time.getHours() % 12
+        let pm = time.getHours() > 12
+        if (interval === 0) { interval = 12 }
+        timetext = interval + ':' + time.getMinutes() + ' ' + (pm ? 'PM' : 'AM')
+    }
+    else {
+        timetext = 'Never'
+    }
+
+    const buttontext = offtime === null 
         ? 'Going off Work'
         : 'Getting back to Work'
 
@@ -67,7 +66,7 @@ export default function App() {
             <ul>{timeList.map((entry, index) => <li key={index}>{entry} minutes</li>)}</ul>
             <button onClick={handleOffWorkClicked}>{buttontext}</button>
             <button onClick={handleClear}>Clear</button>
-            { timeOff && <p>Time at Off: {timeFormat(timeOff)}</p> }
+            { offtime && <p>Time at Off: {timetext}</p> }
         </div>
     )
 }
