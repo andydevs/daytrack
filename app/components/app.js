@@ -5,6 +5,7 @@
  * Created: 2 - 18 - 2021
  */
 import React, { useState } from 'react'
+import { List } from 'immutable';
 
 function timeFormat(time) {
     if (time) {
@@ -19,6 +20,7 @@ function timeFormat(time) {
 }
 
 export default function App() {
+    const [timeList, setTimeList] = useState(new List())
     const [timeOff, setTimeOff] = useState(null)
 
     const offWorkClicked = () => {
@@ -28,6 +30,11 @@ export default function App() {
         }
         else
         {
+            let timeOn = new Date()
+            let timediff = timeOn.getTime() - timeOff.getTime()
+            timediff = Math.round( timediff / (60 * 1000) ) % (24 * 60)
+            setTimeList( timeList.push(timediff) )
+
             setTimeOff(null)
         }
     }
@@ -39,9 +46,9 @@ export default function App() {
     return (
         <div>
             <h1>Day Track</h1>
-            { timeOff && <h2>Last Time off: {timeFormat(timeOff)}</h2> }
-            <ul></ul>
+            <ul>{timeList.map((entry, index) => <li key={index}>{entry} minutes</li>)}</ul>
             <button onClick={offWorkClicked}>{buttontext}</button>
+            { timeOff && <p>Time at Off: {timeFormat(timeOff)}</p> }
         </div>
     )
 }
