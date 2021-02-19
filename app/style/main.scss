@@ -1,0 +1,32 @@
+/**
+ * Custom stack template stuff
+ * 
+ * Author:  Anshul Kharbanda
+ * Created: [Creation Date]
+ */
+* {
+    font-family: 'Segoe UI', 
+        Tahoma, Geneva, 
+        Verdana, sans-serif;
+}
+
+.one {
+    font-size: 40pt;
+}
+
+.two {
+    border: 1px solid;
+    color: blue;
+    
+    .three {
+        color: red;
+    }
+}
+
+.car {
+    max-width: 100%;
+}
+
+.form-group > * {
+    display: block;
+}

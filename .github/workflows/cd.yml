@@ -1,0 +1,28 @@
+name: Continuous Deployment
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+
+      # Build and test
+      - name: Clean Install Packages
+        run: npm ci
+      - name: Build Site
+        run: npm run build
+      - name: Run Tests
+        run: npm test
+
+      # Deploy
+      - name: Deploy to GitHub Pages
+        uses: rdarida/simple-github-pages-deploy-action@v1
+        with:
+          git-base-folder: public
+          commit-message: Auto build static site

@@ -1,0 +1,44 @@
+{
+  "name": "custom-web-stack-template",
+  "version": "1.0.0",
+  "description": "My custom stack for web apps hosted on github pages",
+  "author": "Anshul Kharbanda",
+  "license": "MIT",
+  "keywords": [
+    "webpack",
+    "cypress",
+    "scss",
+    "babel"
+  ],
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve",
+    "test": "start-server-and-test start http-get://localhost:3000 cy:run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andydevs/custom-web-stack-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andydevs/custom-web-stack-template/issues"
+  },
+  "homepage": "https://github.com/andydevs/custom-web-stack-template#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^5.0.1",
+    "cypress": "^5.6.0",
+    "file-loader": "^6.2.0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.0.5",
+    "start-server-and-test": "^1.11.5",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
