@@ -6,20 +6,42 @@
  */
 import React, { useState } from 'react'
 
+function timeFormat(time) {
+    if (time) {
+        let interval = time.getHours() % 12
+        let pm = time.getHours() > 12
+        if (interval === 0) { interval = 12 }
+        return interval + ':' + time.getMinutes() + ' ' + (pm ? 'PM' : 'AM')
+    }
+    else {
+        return 'Never'
+    }
+}
+
 export default function App() {
-    const [offWork, setOffWork] = useState(false)
+    const [timeOff, setTimeOff] = useState(null)
 
-    const toggleOffWork = () => setOffWork(!offWork)
+    const offWorkClicked = () => {
+        if (timeOff === null) 
+        {
+            setTimeOff(new Date())
+        }
+        else
+        {
+            setTimeOff(null)
+        }
+    }
 
-    const buttontext = offWork 
-        ? 'Getting back to Work'
-        : 'Going off Work'
+    const buttontext = timeOff === null 
+        ? 'Going off Work'
+        : 'Getting back to Work'
 
     return (
         <div>
             <h1>Day Track</h1>
+            { timeOff && <h2>Last Time off: {timeFormat(timeOff)}</h2> }
             <ul></ul>
-            <button onClick={toggleOffWork}>{buttontext}</button>
+            <button onClick={offWorkClicked}>{buttontext}</button>
         </div>
     )
 }
