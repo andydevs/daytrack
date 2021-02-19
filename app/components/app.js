@@ -52,6 +52,11 @@ export default function App() {
         }
     }
 
+    const handleClear = () => {
+        setTimeOff(null)
+        setTimeList([])
+    }
+
     const buttontext = timeOff === null 
         ? 'Going off Work'
         : 'Getting back to Work'
@@ -61,6 +66,7 @@ export default function App() {
             <h1>Day Track</h1>
             <ul>{timeList.map((entry, index) => <li key={index}>{entry} minutes</li>)}</ul>
             <button onClick={handleOffWorkClicked}>{buttontext}</button>
+            <button onClick={handleClear}>Clear</button>
             { timeOff && <p>Time at Off: {timeFormat(timeOff)}</p> }
         </div>
     )
