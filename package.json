@@ -1,14 +1,13 @@
 {
-  "name": "custom-web-stack-template",
-  "version": "1.0.0",
-  "description": "My custom stack for web apps hosted on github pages",
+  "name": "daytrack",
+  "version": "0.1.0",
+  "description": "Track my time at work",
   "author": "Anshul Kharbanda",
   "license": "MIT",
   "keywords": [
-    "webpack",
-    "cypress",
-    "scss",
-    "babel"
+    "time",
+    "work",
+    "timecard"
   ],
   "private": true,
   "scripts": {
@@ -20,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andydevs/custom-web-stack-template.git"
+    "url": "git+https://github.com/andydevs/daytrack.git"
   },
   "bugs": {
-    "url": "https://github.com/andydevs/custom-web-stack-template/issues"
+    "url": "https://github.com/andydevs/daytrack/issues"
   },
-  "homepage": "https://github.com/andydevs/custom-web-stack-template#readme",
+  "homepage": "https://github.com/andydevs/daytrack#readme",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
