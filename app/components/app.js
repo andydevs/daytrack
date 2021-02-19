@@ -7,14 +7,19 @@
 import React, { useState } from 'react'
 
 export default function App() {
-
     const [offWork, setOffWork] = useState(false)
+
+    const toggleOffWork = () => setOffWork(!offWork)
+
+    const buttontext = offWork 
+        ? 'Getting back to Work'
+        : 'Going off Work'
 
     return (
         <div>
             <h1>Day Track</h1>
             <ul></ul>
-            <button>Going Off Work</button>
+            <button onClick={toggleOffWork}>{buttontext}</button>
         </div>
     )
 }
