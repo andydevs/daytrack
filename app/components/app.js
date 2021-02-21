@@ -28,7 +28,7 @@ export default function App() {
         localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(state))
     }, [offtime, timeList])
 
-    const handleOffWorkClicked = () => {
+    const handleOnOffWork = () => {
         if (offtime === null)  {
             setOfftime(new Date())
         } else {
@@ -50,7 +50,10 @@ export default function App() {
         let interval = offtime.getHours() % 12
         let pm = offtime.getHours() > 12
         if (interval === 0) { interval = 12 }
-        timetext = interval + ':' + offtime.getMinutes() + ' ' + (pm ? 'PM' : 'AM')
+        let minutes = offtime.getMinutes()
+        if (minutes < 10) { minutes = '0' + minutes }
+        let ampm = pm ? 'PM' : 'AM'
+        timetext = interval + ':' + minutes + ' ' + ampm
     }
     else {
         timetext = 'Never'
@@ -64,7 +67,7 @@ export default function App() {
         <div>
             <h1>Day Track</h1>
             <ul>{timeList.map((entry, index) => <li key={index}>{entry} minutes</li>)}</ul>
-            <button onClick={handleOffWorkClicked}>{buttontext}</button>
+            <button onClick={handleOnOffWork}>{buttontext}</button>
             <button onClick={handleClear}>Clear</button>
             { offtime && <p>Time at Off: {timetext}</p> }
         </div>

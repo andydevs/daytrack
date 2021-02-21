@@ -11,11 +11,12 @@ const onText = 'Getting back to Work'
 const clearText = 'Clear'
 
 // Time regex
-// TODO: Change it to the actual requirement
-const timeRegex = /\d{1,2}\:\d{1,2}\s(AM|PM)/
+const timeRegex = /\d{1,2}\:\d{2}\s(AM|PM)/
 
 // Time skips
-const timeSkips = [23, 41, 82, 30, 15]
+const timeSkips = [
+    23, 41, 82, 30, 
+    15, 3, 8, 68, 60, 12]
 
 // Time constants
 const millisPerMinute = 60000
