@@ -11,7 +11,7 @@ const onText = 'Getting back to Work'
 const clearText = 'Clear'
 
 // Time regex
-const timeRegex = /\d{1,2}\:\d{2}\s(AM|PM)/
+const timeRegex = /(\d{1,2})\:(\d{2})\s(AM|PM)/
 
 // Time skips
 const timeSkips = [
