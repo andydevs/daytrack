@@ -33,9 +33,9 @@ describe('Auto Clear After Day', () => {
         cy.contains('button', onText).should('exist')
         cy.contains(timeRegex).should('exist')
         cy.tick(millisPerDay)
-        cy.contains(timeRegex).should('not.exist')
         cy.contains('button', offText).should('exist')
         cy.contains('button', onText).should('not.exist')
+        cy.contains(timeRegex).should('not.exist')
     })
 
     specify('Auto clear minutes list after day', () => {

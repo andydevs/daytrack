@@ -7,44 +7,62 @@
 import React, { useEffect, useState } from 'react'
 
 const LOCALSTORAGE_KEY = 'daytrack-state'
+const MILLIS_PER_DAY = 86400000
 
 export default function App() {
+    const [timestamp, setTimestamp] = useState(Date.now())
     const [offtime, setOfftime] = useState(null)
     const [timeList, setTimeList] = useState([])
 
-    // Load localstorage if it exists
-    useEffect(() => {
-        let state = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY))
-        if (state) { 
-            if (state.offtime !== null)
-                setOfftime(new Date(state.offtime))
-            setTimeList(state.timeList)
-        }
-    }, [])
-
-    // Set localstorage if update
-    useEffect(() => {
-        let state = { offtime, timeList }
-        localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(state))
-    }, [offtime, timeList])
-
     const handleOnOffWork = () => {
+        console.log(timestamp)
         if (offtime === null)  {
             setOfftime(new Date())
+            setTimestamp(Date.now())
         } else {
             let timeOn = new Date()
             let time = timeOn.getTime() - offtime.getTime()
             time = Math.round( time / (60 * 1000) ) % (24 * 60)
             setTimeList([...timeList, time])
             setOfftime(null)
+            setTimestamp(Date.now())
         }
     }
 
     const handleClear = () => {
         setOfftime(null)
         setTimeList([])
+        setTimestamp(Date.now())
     }
 
+    const checkTime = () => {
+        if (Date.now() - timestamp >= MILLIS_PER_DAY) {
+            handleClear()
+        }
+    }
+
+    // Load localstorage if it exists
+    useEffect(() => {
+        let state = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY))
+        if (state) {
+            if (state.offtime !== null)
+                setOfftime(new Date(state.offtime))
+            setTimestamp(state.timestamp)
+            setTimeList(state.timeList)
+            checkTime()
+        }
+    }, [])
+
+    // Set localstorage if update
+    useEffect(() => {
+        let state = { timestamp, offtime, timeList }
+        localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(state))
+    }, [offtime, timeList])
+
+    // Check time every second or so
+    useEffect(() => setInterval(checkTime, 1000), [])
+
+    // Time text
     let timetext
     if (offtime) {
         let interval = offtime.getHours() % 12
