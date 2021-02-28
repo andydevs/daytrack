@@ -1,15 +1,14 @@
-Custom Web Stack Template
+DayTrack
 ================================================
 
-Template for whenever I'm building a new web 
-app/toy/experiment/thing to be hosted on GitHub 
-using my custom tech stack.
+Track how long I'm off my desk at work.
 
 Technology
 -----------------------------------------------
 
 | For        | Name           |
 |:-----------|:---------------|
+| Framework  | React          |
 | Compiling  | Webpack        |
 | Developing | Webpack        |
 | Testing    | Cypress        |
